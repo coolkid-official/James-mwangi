@@ -11,23 +11,22 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background: #f4f6f8;
+    background-color: #f4f6f8;
     color: #333;
 }
 
-/* SPLASH */
+/* SPLASH SCREEN */
 #splash {
     position: fixed;
     inset: 0;
     background: linear-gradient(135deg,#020617,#0f172a);
-    color: white;
+    color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     z-index: 9999;
 }
-
 #splash img {
     width: 160px;
     height: 160px;
@@ -35,16 +34,10 @@ body {
     border: 4px solid gold;
     margin-bottom: 15px;
 }
+#splash h1 { margin: 0; }
+#splash p { opacity: .8; }
 
-#splash h1 {
-    margin: 0;
-}
-
-#splash p {
-    opacity: .8;
-}
-
-/* HERO */
+/* HEADER */
 header {
     background: linear-gradient(135deg, #0f172a, #1f2933);
     color: #fff;
@@ -105,12 +98,18 @@ section {
     background: #fff;
     padding: 25px;
     border-radius: 14px;
-    box-shadow: 0 8px 20px rgba(0,0,0,.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
 h2 {
+    margin-top: 0;
     border-bottom: 2px solid #eee;
     padding-bottom: 8px;
+}
+
+.highlight {
+    color: #0a7c2f;
+    font-weight: bold;
 }
 
 /* STATS */
@@ -206,20 +205,6 @@ h2 {
     overflow-y: auto;
 }
 
-/* WINNERS */
-.winners {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap: 15px;
-}
-
-.winner-card {
-    background: #f8fafc;
-    border-left: 5px solid gold;
-    padding: 15px;
-    border-radius: 10px;
-}
-
 /* TRUST */
 .trust {
     background: #f0fdf4;
@@ -270,9 +255,9 @@ h2 {
 
 /* FOOTER */
 footer {
-    background: #e5e7eb;
     text-align: center;
     padding: 18px;
+    background: #e5e7eb;
     font-size: 14px;
 }
 </style>
@@ -280,11 +265,11 @@ footer {
 
 <body>
 
-<!-- SPLASH SCREEN -->
+<!-- SPLASH -->
 <div id="splash">
     <img src="james-standing.jpg">
     <h1>James Mwangi</h1>
-    <p>Loading verification details…</p>
+    <p>Loading verified winner profile…</p>
 </div>
 
 <!-- AUDIO -->
@@ -300,8 +285,75 @@ footer {
     <p>Kenya | Elite Verified Winner</p>
     <div class="badge">🏆 ELITE VERIFIED</div>
     <div class="clock" id="clock"></div>
-    <div class="live-status" id="liveStatus">🔴 Live Status: Initializing system verification...</div>
+    <div class="live-status" id="liveStatus">
+        🔴 Live Status: Initializing system verification...
+    </div>
 </header>
+
+<section>
+<h2>About James Mwangi</h2>
+<p>
+James Mwangi is a proud Kenyan whose determination and consistency led to a
+remarkable achievement. His journey reflects patience, discipline, and trust
+in the verification process.
+</p>
+</section>
+
+<section>
+<h2>The Big Win</h2>
+<p>
+James Mwangi successfully secured a total winning of
+<span class="highlight">KSh 245,000</span>.
+This achievement represents a major milestone and opens new opportunities.
+</p>
+</section>
+
+<section>
+<h2>Achievement Overview</h2>
+<div class="stats">
+    <div class="stat"><h3>KSh 245,000</h3><p>Total Won</p></div>
+    <div class="stat"><h3>100%</h3><p>Verified</p></div>
+    <div class="stat"><h3>2025</h3><p>Winning Year</p></div>
+</div>
+</section>
+
+<section>
+<h2>Processing Status</h2>
+<div class="process">
+<p>The winning amount is currently undergoing final system verification.</p>
+<div class="progress"><div class="progress-bar"></div></div>
+<p>Status: <strong>Final Verification Stage</strong></p>
+</div>
+</section>
+
+<section>
+<h2>Official Winner Certificate</h2>
+<div class="certificate">
+<h3>Certificate of Achievement</h3>
+<p>This certifies that</p>
+<h2>James Mwangi</h2>
+<p>has been verified as an official winner</p>
+<p><strong>Amount:</strong> KSh 245,000</p>
+<p>Year: 2025</p>
+</div>
+</section>
+
+<section>
+<h2>Identity Verification</h2>
+<p>Click any image to view full size.</p>
+<div class="image-grid">
+    <div class="image-card">
+        <img src="james-id-front.jpg" onclick="openModal(this.src)">
+        <div class="mask">ID Details Protected</div>
+        <p>National ID – Front</p>
+    </div>
+    <div class="image-card">
+        <img src="james-id-back.jpg" onclick="openModal(this.src)">
+        <div class="mask">Sensitive Area Protected</div>
+        <p>National ID – Back</p>
+    </div>
+</div>
+</section>
 
 <section>
 <h2>System Activity Logs</h2>
@@ -309,60 +361,69 @@ footer {
 </section>
 
 <section>
-<h2>Multiple Verified Winners</h2>
-<div class="winners">
-    <div class="winner-card">🏆 James Mwangi – KSh 245,000</div>
-    <div class="winner-card">🏆 Brian Otieno – KSh 180,000</div>
-    <div class="winner-card">🏆 David Kamau – KSh 150,000</div>
+<h2>Trust & Transparency</h2>
+<div class="trust">
+✅ Real Kenyan Winner<br>
+✅ Verified Identity<br>
+✅ Transparent Verification Process
 </div>
 </section>
 
 <footer>
-© 2025 | James Mwangi Elite Winner | GitHub Pages
+© 2025 | James Mwangi Achievement Website | Hosted on GitHub Pages
 </footer>
 
-<a class="whatsapp" href="https://wa.me/254711949099" target="_blank">WhatsApp Contact</a>
+<a class="whatsapp" href="https://wa.me/254756473164" target="_blank">
+WhatsApp Contact
+</a>
+
+<div class="modal" id="modal" onclick="this.style.display='none'">
+<img id="modalImg">
+</div>
 
 <script>
 /* SPLASH */
-setTimeout(() => {
-    document.getElementById("splash").style.display = "none";
-}, 1000);
+setTimeout(()=>{ document.getElementById("splash").style.display="none"; },1000);
 
 /* CLOCK */
-setInterval(() => {
-    document.getElementById("clock").textContent =
-    "SERVER TIME: " + new Date().toLocaleString();
-}, 1000);
+setInterval(()=>{
+document.getElementById("clock").textContent =
+"SERVER TIME: " + new Date().toLocaleString();
+},1000);
 
-/* LIVE STATUS */
-const statuses = [
-    "🔴 Live Status: Verifying identity records...",
-    "🟡 Live Status: Processing compliance checks...",
-    "🟢 Live Status: Verification almost complete...",
-    "🔵 Live Status: Awaiting final system confirmation..."
+/* STATUS */
+const statuses=[
+"🔴 Live Status: Verifying identity records...",
+"🟡 Live Status: Processing compliance checks...",
+"🟢 Live Status: Verification almost complete...",
+"🔵 Live Status: Awaiting final confirmation..."
 ];
-let s = 0;
-setInterval(() => {
-    document.getElementById("liveStatus").textContent = statuses[s];
-    s = (s + 1) % statuses.length;
-}, 5000);
+let i=0;
+setInterval(()=>{
+document.getElementById("liveStatus").textContent=statuses[i];
+i=(i+1)%statuses.length;
+},5000);
 
 /* LOGS */
-const logs = [
-    "Connecting to verification node...",
-    "Identity hash validated",
-    "Compliance layer synced",
-    "Security token issued",
-    "Awaiting final confirmation"
+const logs=[
+"Connecting to verification node...",
+"Identity hash validated",
+"Compliance layer synced",
+"Security token issued",
+"Awaiting final confirmation"
 ];
-let l = 0;
-setInterval(() => {
-    const box = document.getElementById("logs");
-    box.innerHTML += "> " + logs[l] + "<br>";
-    box.scrollTop = box.scrollHeight;
-    l = (l + 1) % logs.length;
-}, 4000);
+let l=0;
+setInterval(()=>{
+const box=document.getElementById("logs");
+box.innerHTML+="> "+logs[l]+"<br>";
+box.scrollTop=box.scrollHeight;
+l=(l+1)%logs.length;
+},4000);
+
+function openModal(src){
+document.getElementById("modalImg").src=src;
+document.getElementById("modal").style.display="flex";
+}
 </script>
 
 </body>
