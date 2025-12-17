@@ -15,11 +15,27 @@ position:fixed;inset:0;background:linear-gradient(135deg,#020617,#0f172a);
 color:#fff;display:flex;align-items:center;justify-content:center;z-index:10000
 }
 .lock-box{
-background:#020617;padding:30px;border-radius:14px;
-text-align:center;max-width:360px;width:90%
+background:#020617;padding:30px;border-radius:16px;
+text-align:center;max-width:380px;width:92%;
+box-shadow:0 20px 50px rgba(0,0,0,.6)
+}
+.lock-profile{
+width:110px;height:110px;border-radius:50%;
+border:4px solid gold;object-fit:cover;margin-bottom:10px
+}
+.lock-name{
+font-size:20px;font-weight:bold;margin-top:6px
+}
+.lock-verified{
+display:inline-block;margin-top:6px;
+background:#22c55e;color:#022c22;
+padding:4px 14px;border-radius:20px;font-size:13px;font-weight:bold
+}
+.lock-note{
+font-size:13px;color:#cbd5f5;margin-top:10px
 }
 .lock-box input,.lock-box button{
-width:100%;padding:12px;margin-top:10px;border-radius:8px;border:none
+width:100%;padding:12px;margin-top:12px;border-radius:8px;border:none
 }
 .lock-box button{background:gold;font-weight:bold;cursor:pointer}
 .attempts{margin-top:8px;font-size:13px;color:#facc15}
@@ -136,12 +152,19 @@ align-items:center;justify-content:center;z-index:99999
 <!-- LOCK -->
 <div id="lockScreen">
 <div class="lock-box">
-<h2>🔐 Secure Access</h2>
-<p>Enter security code to continue</p>
-<input type="password" id="code" placeholder="Security Code">
-<button onclick="unlock()">Unlock</button>
+
+<img src="james-standing.jpg" class="lock-profile" alt="James Mwangi">
+<div class="lock-name">James Mwangi</div>
+<div class="lock-verified">🟢 Verified Profile</div>
+<div class="lock-note">
+This secure access is assigned to the verified profile above.
+</div>
+
+<input type="password" id="code" placeholder="Enter Security Code">
+<button onclick="unlock()">Unlock Secure Profile</button>
 <p id="err" style="color:#f87171"></p>
 <div class="attempts" id="attempts">Attempts: 0</div>
+
 </div>
 </div>
 
@@ -154,7 +177,7 @@ align-items:center;justify-content:center;z-index:99999
 
 <!-- AUDIO -->
 <div class="audio-box">
-<audio id="successAudio" controls>
+<audio id="successAudio">
 <source src="background-audio.mp3" type="audio/mpeg">
 </audio>
 <audio id="errorAudio">
@@ -185,16 +208,6 @@ a verified achievement recognized through a secure and transparent process.
 </section>
 
 <section>
-<h2>Live Statistics Dashboard</h2>
-<div class="dashboard">
-<div class="card">Total Won<br><strong id="won">245000</strong></div>
-<div class="card">Verification %<br><strong>100%</strong></div>
-<div class="card">Active Winners<br><strong id="winners">4</strong></div>
-<div class="card">System Status<br><strong>ACTIVE</strong></div>
-</div>
-</section>
-
-<section>
 <h2>Identity Verification Documents</h2>
 <p>Sensitive details are partially masked for privacy.</p>
 <div class="image-grid">
@@ -204,17 +217,8 @@ a verified achievement recognized through a secure and transparent process.
 </div>
 <div class="image-card">
 <img src="james-id-back.jpg" onclick="openModal(this.src)">
-<p><strong>National ID – Back</strong><br>Issued by Government of Kenya</p>
+<p><strong>National ID – Back</strong><br>Government of Kenya</p>
 </div>
-</div>
-</section>
-
-<section>
-<h2>Processing Status</h2>
-<div class="process">
-<p>The winning amount is undergoing final system verification.</p>
-<div class="progress"><div class="progress-bar"></div></div>
-<p>Status: <strong>Final Verification Stage</strong></p>
 </div>
 </section>
 
@@ -226,16 +230,6 @@ a verified achievement recognized through a secure and transparent process.
 <p>Amount: <strong>KSh 245,000</strong></p>
 <p>Year: 2025</p>
 <button class="print-btn" onclick="window.print()">🖨 Print</button>
-</div>
-</section>
-
-<section>
-<h2>Other Verified Winners</h2>
-<div class="winners">
-<div class="winner-card"><img src="winner1.jpg"><strong>Mary Wanjiru</strong><br>KSh 180,000</div>
-<div class="winner-card"><img src="winner2.jpg"><strong>David Otieno</strong><br>KSh 320,000</div>
-<div class="winner-card"><img src="winner3.jpg"><strong>Sarah Chebet</strong><br>KSh 95,000</div>
-<div class="winner-card"><img src="winner4.jpg"><strong>Brian Mutua</strong><br>KSh 210,000</div>
 </div>
 </section>
 
@@ -254,38 +248,32 @@ WhatsApp Contact
 
 <script>
 let attempts=0;
-const attemptsEl=document.getElementById("attempts");
 
 function fadeInAudio(audio){
-audio.volume=0;
-audio.play();
+audio.volume=0;audio.play();
 let v=0;
-const fade=setInterval(()=>{
-v+=0.05;
-audio.volume=Math.min(v,1);
-if(v>=1) clearInterval(fade);
+const f=setInterval(()=>{
+v+=0.05;audio.volume=Math.min(v,1);
+if(v>=1)clearInterval(f);
 },120);
 }
 
 function unlock(){
 const success=document.getElementById("successAudio");
 const errorSound=document.getElementById("errorAudio");
-
 if(code.value==="JAMES"){
 attempts=0;
-attemptsEl.textContent="Attempts: 0";
+attempts.textContent="Attempts: 0";
 lockScreen.style.display="none";
 splash.style.display="flex";
-success.currentTime=0;
 fadeInAudio(success);
 setTimeout(()=>splash.style.display="none",1000);
 }else{
 attempts++;
-attemptsEl.textContent="Attempts: "+attempts;
-errorSound.currentTime=0;
-errorSound.play();
+document.getElementById("attempts").textContent="Attempts: "+attempts;
+errorSound.currentTime=0;errorSound.play();
 err.textContent="Invalid security code";
-if(navigator.vibrate){navigator.vibrate(300);}
+if(navigator.vibrate)navigator.vibrate(300);
 }
 }
 
@@ -294,24 +282,7 @@ modalImg.src=src;
 imgModal.style.display="flex";
 }
 
-/* CLOCK */
 setInterval(()=>clock.textContent="SERVER TIME: "+new Date().toLocaleString(),1000);
-
-/* STATUS */
-const st=[
-"🔴 Verifying identity records…",
-"🟡 Processing compliance checks…",
-"🟢 Verification almost complete…",
-"🔵 Awaiting final confirmation…"
-];
-let i=0;
-setInterval(()=>{status.textContent=st[i];i=(i+1)%st.length},5000);
-
-/* AUTO STATS */
-setInterval(()=>{
-won.textContent=parseInt(won.textContent)+1;
-winners.textContent=parseInt(winners.textContent)+(Math.random()>0.7?1:0);
-},7000);
 </script>
 
 </body>
